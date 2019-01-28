@@ -39,8 +39,7 @@ namespace OddsSystem
         {
             services.AddDbContext<MsSqlDbContext>(options =>
             {
-                var connectionString = Configuration.GetConnectionString("DefaultConnection");
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.BuildServiceProvider().GetService<MsSqlDbContext>().Database.Migrate();
