@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using OddsSystem.Data;
 using OddsSystem.Data.Repository;
 using OddsSystem.Data.UnitOfWork;
+using OddsSystem.Extentions;
 using OddsSystem.Services.Data;
 using OddsSystem.Services.Data.Contracts;
 
@@ -20,12 +21,16 @@ namespace OddsSystem
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
+            this.Environment = env;
         }
 
         public IConfiguration Configuration { get; }
+
+        public IHostingEnvironment Environment { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -38,10 +43,7 @@ namespace OddsSystem
         private void RegisterData(IServiceCollection services)
         {
             services.AddDbContext<MsSqlDbContext>(options =>
-            {
-                var connectionString = Configuration.GetConnectionString("DefaultConnection");
-                options.UseSqlServer(connectionString);
-            });
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.BuildServiceProvider().GetService<MsSqlDbContext>().Database.Migrate();
 
@@ -57,10 +59,14 @@ namespace OddsSystem
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseDatabaseMigration();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseStaticFiles();
 
             app.UseMvc();
         }
