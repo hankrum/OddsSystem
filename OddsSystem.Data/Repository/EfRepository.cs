@@ -17,7 +17,7 @@ namespace OddsSystem.Data.Repository
         {
             get
             {
-                return this.context.Set<T>();
+                return this.context.Set<T>().AsQueryable();
             }
         }
 

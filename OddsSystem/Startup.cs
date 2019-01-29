@@ -43,7 +43,8 @@ namespace OddsSystem
         private void RegisterData(IServiceCollection services)
         {
             services.AddDbContext<MsSqlDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+                b => b.MigrationsAssembly("OddsSystem")));
 
             services.BuildServiceProvider().GetService<MsSqlDbContext>().Database.Migrate();
 

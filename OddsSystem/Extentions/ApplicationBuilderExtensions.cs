@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OddsSystem.Data;
+using OddsSystem.Data.Model;
+using OddsSystem.Services.Data.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,49 +19,42 @@ namespace OddsSystem.Extentions
             {
                 serviceScope.ServiceProvider.GetService<MsSqlDbContext>().Database.Migrate();
 
+            //    var eventsService = serviceScope.ServiceProvider.GetService<ISportEventService>();
 
-                //Task.Run(async () =>
-                //{
-                //    var adminUserName = WebConstants.AdminRole;
-
-                //    var roles = new[]
-                //    {
-                //            adminUserName,
-                //            WebConstants.MasterAdminRole
-                //        };
-
-                //    foreach (var role in roles)
-                //    {
-                //        var roleExists = await roleManager.RoleExistsAsync(role);
-
-                //        if (!roleExists)
-                //        {
-                //            await roleManager.CreateAsync(new IdentityRole
-                //            {
-                //                Name = role
-                //            });
-                //        }
-                //    }
-
-                //    var adminEmail = "admin@adminsite.com";
-
-                //    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-
-                //    if (adminUser == null)
-                //    {
-                //        adminUser = new User
-                //        {
-                //            Email = adminEmail,
-                //            UserName = adminUserName
-                //        };
-
-                //        await userManager.CreateAsync(adminUser, "Admin123_");
-
-                //        await userManager.AddToRoleAsync(adminUser, adminUserName);
-                //        await userManager.AddToRoleAsync(adminUser, WebConstants.MasterAdminRole);
-                //    }
-                //})
-                //    .Wait();
+            //    IEnumerable<SportEvent> events = new List<SportEvent>
+            //{
+            //    new SportEvent
+            //    {
+            //        EventName = "LiverPool-Juventus",
+            //        OddsForFirstTeam = 1.95,
+            //        OddsForDraw = 3.15,
+            //        OddsForSecondTeam = 2.20,
+            //        EventStartDate = new DateTime(2019,12,25,22,0, 0)
+            //    },
+            //     new SportEvent
+            //   {
+            //        EventName = "Grigor Dimitrov-Rafael Nadal",
+            //        OddsForFirstTeam = 1.95,
+            //        OddsForDraw = 3.15,
+            //        OddsForSecondTeam = 2.20,
+            //        EventStartDate = new DateTime(2019,12,25,22,0, 0)
+            //    },
+            //    new SportEvent
+            //    {
+            //        EventName = "Barcelona-Ludogorets",
+            //        OddsForFirstTeam = 1.95,
+            //        OddsForDraw = 3.15,
+            //        OddsForSecondTeam = 2.20,
+            //        EventStartDate = new DateTime(2019,01,25,22,0, 0)
+            //    },
+            //};
+            //    if (eventsService.IsEmpty())
+            //    {
+            //        foreach (var item in events)
+            //        {
+            //            eventsService.Create(item);
+            //        }
+            //    }
             }
 
             return app;

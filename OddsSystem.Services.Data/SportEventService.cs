@@ -3,6 +3,7 @@ using OddsSystem.Data.UnitOfWork;
 using OddsSystem.Services.Data.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OddsSystem.Services.Data
 {
@@ -17,39 +18,20 @@ namespace OddsSystem.Services.Data
 
         public IEnumerable<SportEvent> All()
         {
-            IEnumerable<SportEvent> models = new List<SportEvent>
-            {
-                new SportEvent
-                {
-                    EventName = "LiverPool-Juventus",
-                    OddsForFirstTeam = 1.95,
-                    OddsForDraw = 3.15,
-                    OddsForSecondTeam = 2.20,
-                    EventStartDate = new DateTime(2019,12,25,22,0, 0)
-                },
-                 new SportEvent
-               {
-                    EventName = "Grigor Dimitrov-Rafael Nadal",
-                    OddsForFirstTeam = 1.95,
-                    OddsForDraw = 3.15,
-                    OddsForSecondTeam = 2.20,
-                    EventStartDate = new DateTime(2019,12,25,22,0, 0)
-                },
-                new SportEvent
-                {
-                    EventName = "Barcelona-Ludogorets",
-                    OddsForFirstTeam = 1.95,
-                    OddsForDraw = 3.15,
-                    OddsForSecondTeam = 2.20,
-                    EventStartDate = new DateTime(2019,01,25,22,0, 0)
-                },
-            };
-            return models;
+            IEnumerable<SportEvent> events = this.unitOfWork.SportEvents.All.ToList();
+            return events;
         }
 
-        public SportEvent Create()
+        public bool IsEmpty()
         {
-            throw new NotImplementedException();
+            return !this.unitOfWork.SportEvents.All.Any();
+        }
+
+        public void Create(SportEvent sportEvent)
+        {
+            this.unitOfWork.SportEvents.Add(sportEvent);
+
+            this.unitOfWork.SaveChanges();
         }
 
         public void Delete(long Id)

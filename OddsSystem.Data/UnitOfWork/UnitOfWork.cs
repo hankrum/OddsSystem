@@ -19,10 +19,10 @@ namespace OddsSystem.Data.UnitOfWork
         {
             get
             {
-                //if (this.sportEvents == null)
-                //{
-                //    this.sportEvents = new EFRepository<SportEvent>(context);
-                //}
+                if (this.sportEvents == null)
+                {
+                    this.sportEvents = new EFRepository<SportEvent>(context);
+                }
 
                 return this.sportEvents;
             }
