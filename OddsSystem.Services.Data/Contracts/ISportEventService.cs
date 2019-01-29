@@ -9,6 +9,8 @@ namespace OddsSystem.Services.Data.Contracts
 
         bool IsEmpty();
 
+        SportEvent GetById(long id);
+
         void Create(SportEvent sportEvent);
 
         void Delete(long id);

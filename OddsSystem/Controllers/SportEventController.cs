@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using OddsSystem.Data.Model;
 using OddsSystem.Services.Data.Contracts;
@@ -18,7 +15,6 @@ namespace OddsSystem.Controllers
             this.sportEventService = sportEventService;
         }
 
-        // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
@@ -26,29 +22,29 @@ namespace OddsSystem.Controllers
             return Json(events);
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            SportEvent sportEvent = this.sportEventService.GetById(id);
+            return Json(sportEvent);
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]SportEvent sportEvent)
         {
+            this.sportEventService.Create(sportEvent);
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]SportEvent sportEvent)
         {
+            this.sportEventService.Update(sportEvent);
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            this.sportEventService.Delete(id);
         }
     }
 }

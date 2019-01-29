@@ -22,6 +22,11 @@ namespace OddsSystem.Services.Data
             return events;
         }
 
+        public SportEvent GetById(long id)
+        {
+            return this.unitOfWork.SportEvents.GetById(id);
+        }
+
         public bool IsEmpty()
         {
             return !this.unitOfWork.SportEvents.All.Any();

@@ -19,15 +19,9 @@ namespace OddsSystem.Data.UnitOfWork
         {
             get
             {
-                if (this.sportEvents == null)
-                {
-                    this.sportEvents = new EFRepository<SportEvent>(context);
-                }
-
                 return this.sportEvents;
             }
         }
-
 
         public int SaveChanges()
         {
