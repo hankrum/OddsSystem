@@ -11,8 +11,8 @@ namespace OddsSystem.Services.Data.Contracts
 
         void Create(SportEvent sportEvent);
 
-        void Delete(long Id);
+        void Delete(long id);
 
-        void Update(long Id);
+        void Update(SportEvent model);
     }
 }

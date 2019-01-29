@@ -8,7 +8,7 @@ using OddsSystem.Services.Data.Contracts;
 
 namespace OddsSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/sportevent")]
     public class SportEventController : Controller
     {
         private ISportEventService sportEventService;

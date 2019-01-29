@@ -34,14 +34,19 @@ namespace OddsSystem.Services.Data
             this.unitOfWork.SaveChanges();
         }
 
-        public void Delete(long Id)
+        public void Delete(long id)
         {
-            throw new NotImplementedException();
+            var model = this.unitOfWork.SportEvents.GetById(id);
+            this.unitOfWork.SportEvents.Delete(model);
+
+            this.unitOfWork.SaveChanges();
         }
 
-        public void Update(long Id)
+        public void Update(SportEvent model)
         {
-            throw new NotImplementedException();
+            this.unitOfWork.SportEvents.Update(model);
+
+            this.unitOfWork.SaveChanges();
         }
     }
 }
