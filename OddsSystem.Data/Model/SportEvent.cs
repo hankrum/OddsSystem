@@ -12,13 +12,13 @@ namespace OddsSystem.Data.Model
         public string EventName { get; set; }
 
         [Range(1.0, double.MaxValue)]
-        public double OddsForFirstTeam { get; set; }
+        public double? OddsForFirstTeam { get; set; }
 
         [Range(1.0, double.MaxValue)]
-        public double OddsForDraw { get; set; }
+        public double? OddsForDraw { get; set; }
 
         [Range(1.0, double.MaxValue)]
-        public double OddsForSecondTeam { get; set; }
+        public double? OddsForSecondTeam { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime EventStartDate { get; set; }

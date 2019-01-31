@@ -15,9 +15,9 @@ namespace OddsSystem.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EventName = table.Column<string>(nullable: false),
-                    OddsForFirstTeam = table.Column<double>(nullable: false),
-                    OddsForDraw = table.Column<double>(nullable: false),
-                    OddsForSecondTeam = table.Column<double>(nullable: false),
+                    OddsForFirstTeam = table.Column<double>(nullable: true),
+                    OddsForDraw = table.Column<double>(nullable: true),
+                    OddsForSecondTeam = table.Column<double>(nullable: true),
                     EventStartDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
