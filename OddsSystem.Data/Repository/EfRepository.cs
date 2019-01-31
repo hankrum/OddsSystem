@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Linq;
+using Infrastructure;
 
 namespace OddsSystem.Data.Repository
 {
@@ -10,7 +12,7 @@ namespace OddsSystem.Data.Repository
 
         public EFRepository(MsSqlDbContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public IQueryable<T> All
@@ -23,6 +25,7 @@ namespace OddsSystem.Data.Repository
 
         public void Add(T entity)
         {
+            Validated.NotNull(entity, nameof(entity));
             EntityEntry entry = this.context.Entry(entity);
 
             this.context.Set<T>().Add(entity);
@@ -30,12 +33,14 @@ namespace OddsSystem.Data.Repository
 
         public void Delete(T entity)
         {
+            Validated.NotNull(entity, nameof(entity));
             var entry = this.context.Entry(entity);
             this.context.Set<T>().Remove(entity);
         }
 
         public void Update(T entity)
         {
+            Validated.NotNull(entity, nameof(entity));
             EntityEntry entry = this.context.Entry(entity);
                 this.context.Set<T>().Update(entity);
         }

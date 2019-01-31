@@ -1,4 +1,5 @@
-﻿using OddsSystem.Data.Model;
+﻿using Infrastructure;
+using OddsSystem.Data.Model;
 using OddsSystem.Data.UnitOfWork;
 using OddsSystem.Services.Data.Contracts;
 using System;
@@ -34,6 +35,8 @@ namespace OddsSystem.Services.Data
 
         public void Create(SportEvent sportEvent)
         {
+            Validated.NotNull(sportEvent, nameof(sportEvent));
+
             this.unitOfWork.SportEvents.Add(sportEvent);
 
             this.unitOfWork.SaveChanges();
@@ -47,9 +50,11 @@ namespace OddsSystem.Services.Data
             this.unitOfWork.SaveChanges();
         }
 
-        public void Update(SportEvent model)
+        public void Update(SportEvent sportEvent)
         {
-            this.unitOfWork.SportEvents.Update(model);
+            Validated.NotNull(sportEvent, nameof(sportEvent));
+
+            this.unitOfWork.SportEvents.Update(sportEvent);
 
             this.unitOfWork.SaveChanges();
         }

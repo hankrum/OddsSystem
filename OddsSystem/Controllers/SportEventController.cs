@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using OddsSystem.Data.Model;
 using OddsSystem.Services.Data.Contracts;
@@ -12,7 +13,7 @@ namespace OddsSystem.Controllers
 
         public SportEventController(ISportEventService sportEventService)
         {
-            this.sportEventService = sportEventService;
+            this.sportEventService = sportEventService ?? throw new ArgumentNullException(nameof(sportEventService));
         }
 
         [HttpGet]

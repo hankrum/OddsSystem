@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\OddsSystem.Data\OddsSystem.Data.csproj" />
     <ProjectReference Include="..\OddsSystem.Services.Data\OddsSystem.Services.Data.csproj" />
   </ItemGroup>
