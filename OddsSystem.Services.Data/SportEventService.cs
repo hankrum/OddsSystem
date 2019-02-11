@@ -1,10 +1,12 @@
 ﻿using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using OddsSystem.Data.Model;
 using OddsSystem.Data.UnitOfWork;
 using OddsSystem.Services.Data.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OddsSystem.Services.Data
 {
@@ -17,15 +19,15 @@ namespace OddsSystem.Services.Data
             this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public IEnumerable<SportEvent> All()
+        public async Task<IEnumerable<SportEvent>> All()
         {
-            IEnumerable<SportEvent> events = this.unitOfWork.SportEvents.All.ToList();
+            IEnumerable<SportEvent> events = await this.unitOfWork.SportEvents.All.ToListAsync();
             return events;
         }
 
-        public SportEvent GetById(long id)
+        public async Task<SportEvent> GetById(long id)
         {
-            return this.unitOfWork.SportEvents.GetById(id);
+            return await this.unitOfWork.SportEvents.GetById(id);
         }
 
         public bool IsEmpty()
@@ -33,30 +35,36 @@ namespace OddsSystem.Services.Data
             return !this.unitOfWork.SportEvents.All.Any();
         }
 
-        public void Create(SportEvent sportEvent)
+        public async Task<SportEvent> Create(SportEvent sportEvent)
         {
             Validated.NotNull(sportEvent, nameof(sportEvent));
 
-            this.unitOfWork.SportEvents.Add(sportEvent);
+            SportEvent addedSportEvent = this.unitOfWork.SportEvents.Add(sportEvent);
 
-            this.unitOfWork.SaveChanges();
+            await this.unitOfWork.SaveChanges();
+
+            return addedSportEvent;
         }
 
-        public void Delete(long id)
+        public async Task<SportEvent> Delete(long id)
         {
-            var model = this.unitOfWork.SportEvents.GetById(id);
-            this.unitOfWork.SportEvents.Delete(model);
+            var model = await this.unitOfWork.SportEvents.GetById(id);
+            SportEvent deletedSportEvent = this.unitOfWork.SportEvents.Delete(model);
 
-            this.unitOfWork.SaveChanges();
+            await this.unitOfWork.SaveChanges();
+
+            return deletedSportEvent;
         }
 
-        public void Update(SportEvent sportEvent)
+        public async Task<SportEvent> Update(SportEvent sportEvent)
         {
             Validated.NotNull(sportEvent, nameof(sportEvent));
 
-            this.unitOfWork.SportEvents.Update(sportEvent);
+            SportEvent updatedSportEvent = this.unitOfWork.SportEvents.Update(sportEvent);
 
-            this.unitOfWork.SaveChanges();
+            await this.unitOfWork.SaveChanges();
+
+            return updatedSportEvent;
         }
     }
 }

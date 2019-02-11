@@ -1,6 +1,7 @@
 ﻿using OddsSystem.Data.Model;
 using OddsSystem.Data.Repository;
 using System;
+using System.Threading.Tasks;
 
 namespace OddsSystem.Data.UnitOfWork
 {
@@ -23,9 +24,9 @@ namespace OddsSystem.Data.UnitOfWork
             }
         }
 
-        public int SaveChanges()
+        public async Task<int> SaveChanges()
         {
-            return context.SaveChanges();
+            return await context.SaveChangesAsync();
         }
     }
 }

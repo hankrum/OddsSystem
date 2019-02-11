@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Infrastructure;
+using System.Threading.Tasks;
 
 namespace OddsSystem.Data.Repository
 {
@@ -23,31 +24,33 @@ namespace OddsSystem.Data.Repository
             }
         }
 
-        public void Add(T entity)
+        public T Add(T entity)
         {
             Validated.NotNull(entity, nameof(entity));
             EntityEntry entry = this.context.Entry(entity);
 
-            this.context.Set<T>().Add(entity);
+            return this.context.Set<T>().Add(entity).Entity;
         }
 
-        public void Delete(T entity)
+        public T Delete(T entity)
         {
             Validated.NotNull(entity, nameof(entity));
             var entry = this.context.Entry(entity);
-            this.context.Set<T>().Remove(entity);
+
+            return this.context.Set<T>().Remove(entity).Entity;
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
             Validated.NotNull(entity, nameof(entity));
             EntityEntry entry = this.context.Entry(entity);
-                this.context.Set<T>().Update(entity);
+
+            return this.context.Set<T>().Update(entity).Entity;
         }
 
-        public T GetById(long id)
+        public async Task<T> GetById(long id)
         {
-            return this.context.Set<T>().Find(id);
+            return await this.context.Set<T>().FindAsync(id);
         }
     }
 }

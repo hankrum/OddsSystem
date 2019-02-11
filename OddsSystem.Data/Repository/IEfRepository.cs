@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace OddsSystem.Data.Repository
 {
@@ -6,12 +7,12 @@ namespace OddsSystem.Data.Repository
     {
         IQueryable<T> All { get; }
 
-        void Add(T entity);
+        T Add(T entity);
 
-        void Delete(T entity);
+        T Delete(T entity);
 
-        void Update(T entity);
+        T Update(T entity);
 
-        T GetById(long id);
+        Task<T> GetById(long id);
     }
 }

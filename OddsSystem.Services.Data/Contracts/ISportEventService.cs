@@ -1,20 +1,21 @@
 ﻿using OddsSystem.Data.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OddsSystem.Services.Data.Contracts
 {
     public interface ISportEventService
     {
-        IEnumerable<SportEvent> All();
+        Task<IEnumerable<SportEvent>> All();
 
         bool IsEmpty();
 
-        SportEvent GetById(long id);
+        Task<SportEvent> GetById(long id);
 
-        void Create(SportEvent sportEvent);
+        Task<SportEvent> Create(SportEvent sportEvent);
 
-        void Delete(long id);
+        Task<SportEvent> Delete(long id);
 
-        void Update(SportEvent model);
+        Task<SportEvent> Update(SportEvent model);
     }
 }

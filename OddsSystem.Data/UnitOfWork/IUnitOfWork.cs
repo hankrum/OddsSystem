@@ -1,5 +1,6 @@
 ﻿using OddsSystem.Data.Model;
 using OddsSystem.Data.Repository;
+using System.Threading.Tasks;
 
 namespace OddsSystem.Data.UnitOfWork
 {
@@ -7,6 +8,6 @@ namespace OddsSystem.Data.UnitOfWork
     {
         IEfRepository<SportEvent> SportEvents { get; }
 
-        int SaveChanges();
+        Task<int> SaveChanges();
     }
 }
